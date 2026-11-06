@@ -1,0 +1,4 @@
+﻿# previews and inspector output stay local
+_preview*.png
+_pc/
+.shots*
