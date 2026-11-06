@@ -5,7 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quotes · Yuhan</title>
 <meta name="description" content="Lines worth reading twice — each with who said it, and where.">
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="Images/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="Images/icon-180.png">
+<meta name="theme-color" content="#fbfaf7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Yuhan">
+<meta property="og:title" content="Quotes · Yuhan">
+<meta property="og:description" content="Lines worth reading twice — each with who said it, and where.">
+<meta property="og:url" content="https://cccyyyhhh123.github.io/yuhan-site/quote.html">
+<meta property="og:image" content="https://cccyyyhhh123.github.io/yuhan-site/Images/cover-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -23,6 +34,12 @@
 <main>
   <h1>Quotes</h1>
   <p>Lines worth reading twice — each with who said it, and where.</p>
+
+  <div class="filter">
+    <label for="q">Filter these quotes</label>
+    <input type="search" id="q" name="q" placeholder="Type a word, or a name…" autocomplete="off" aria-describedby="count">
+    <p class="muted" id="count" role="status" aria-live="polite">8 quotes</p>
+  </div>
 
   <article class="quote">
     <blockquote>
@@ -91,5 +108,40 @@
   <a href="about.html">About</a>
 </footer>
 
+<script>
+  /* filtering the quotes: type a word, and only the matching cards stay.
+     Nothing is fetched — every card is already on the page. */
+  (function () {
+    var input = document.getElementById('q');
+    var count = document.getElementById('count');
+    if (!input || !count) return;
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.quote'));
+    var total = cards.length;
+
+    function apply() {
+      var q = input.value.trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (card) {
+        var hit = !q || card.textContent.toLowerCase().indexOf(q) !== -1;
+        card.hidden = !hit;
+        if (hit) shown++;
+      });
+      count.textContent = !q
+        ? total + ' quotes'
+        : shown + ' of ' + total + ' quotes match';
+      count.classList.toggle('empty', q !== '' && shown === 0);
+    }
+
+    input.addEventListener('input', apply);
+    /* "/" jumps to the field, the way most searchable pages do */
+    document.addEventListener('keydown', function (event) {
+      if (event.key === '/' && document.activeElement !== input) {
+        event.preventDefault();
+        input.focus();
+      }
+    });
+    apply();
+  })();
+</script>
 </body>
 </html>

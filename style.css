@@ -144,3 +144,25 @@ dd { margin: .15rem 0 0 0; color: #475569; }
   .hero img { height: 14rem; }
   h1 { font-size: 1.7rem; }
 }
+/* 10 · The quote filter: one field, and the cards it hides */
+.filter { margin: 1.25rem 0 1.75rem; }
+.filter label { display: block; font-size: .85rem; color: #6b7280; margin-bottom: .35rem; }
+.filter input {
+  width: 100%;
+  max-width: 24rem;
+  font: inherit;
+  font-size: 1rem;
+  padding: .55em .8em;
+  color: #1f2937;
+  background: #fff;
+  border: 1px solid #dcd8d0;
+  border-radius: 8px;
+}
+.filter input:focus {
+  outline: 2px solid #c2410c;
+  outline-offset: 1px;
+  border-color: #c2410c;
+}
+.filter .muted { margin: .45rem 0 0; }
+.filter .muted.empty { color: #b91c1c; }
+.quote[hidden] { display: none; }
